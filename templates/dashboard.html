@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+<br>
+    <a href="/create">Add new list</a>
+    <a href="/edit-title">Edit list title</a>
+    <a href="/edit-content">Edit Content (not set up yet)</a>      
+    <a href="/delete">Delete list</a>  
+<br>
+    {% for list, items in lists.items() %}
+        <div class="card" style="width: 18rem; margin-bottom: 50px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for item in items %}
+                    <li class="list-group-item">{{ item['content'] }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+    {% endfor %}
+<div class="logout">
+    <a href="/logout">Log out!</a>
+</div>
+
+{% endblock %}

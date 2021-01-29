@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+<br>
+<br>
+<h2>Create New List</h2>
+<form action="/createlist" method = "post">
+    <input placeholder="List Name" name="title" type="text">
+    <input type="submit">   
+<br>
+<br>
+{{ create_message }} 
+<br>
+<br>
+<a href="/todos">See your lists</a>
+<br>
+<br>
+<br>
+{{ todos_message }}
+<div class="logout">
+    <a href="/logout">Log out!</a>
+</div>
+    {% for list, tasks in lists.tasks() %}
+        <div class="card" style="width: 18rem; margin-bottom: 50px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for task in taskss %}
+                    <li class="list-group-task">{{ task['content'] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% endblock %}

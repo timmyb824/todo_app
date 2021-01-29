@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Create New List</h2>
+<form action="/create" method = "post">
+    <input placeholder="List Name" name="title" type="text">
+    <input placeholder="Task Name" name="content" type="text">
+    <input type="submit">  
+<p>{{ message }}</p> 
+<div class="footer-back">
+    <a href="/dashboard">return to dashboard</a>
+</div>
+{% endblock %}
