@@ -16,6 +16,7 @@ def check_pw(username):
     connection.close()
     return password
 
+#check users by looping through the table
 def check_users():
     connection = get_db_connection()
     db_users = connection.execute("""SELECT username FROM users ORDER BY id DESC;""").fetchall()
@@ -28,7 +29,8 @@ def check_users():
     connection.commit()
     connection.close()
     return users    
-    
+
+#user signup    
 def signup(username, password):
     connection = get_db_connection()
     exist = connection.execute("""SELECT password FROM users WHERE username='{username}';""".format(username=username)).fetchone()
@@ -84,7 +86,7 @@ def edit_title(username, title, new_title):
     connection.close()
     return 'List name updated!'
 
-#update task name (need to add a username check before editing task)
+#update task name (need to add a username check)
 def edit_task(content, new_content):
     connection = get_db_connection()
     connection.execute("""UPDATE items SET content = '{new_content}' WHERE content = '{content}';""".format(new_content=new_content, content=content))
@@ -93,7 +95,7 @@ def edit_task(content, new_content):
     connection.close()
     return 'Task name updated!'
 
-#delete todo list (need to add a username check before deleting title)
+#delete todo list (need to add a username check)
 def delete(username, title):
     connection = get_db_connection()
     connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(title=title))
@@ -103,7 +105,7 @@ def delete(username, title):
     connection.close()
     return 'Todo deleted!'
 
-#delete task (need to add a username check before delete a task)
+#delete task (need to add a username check)
 def delete_task(content, title):
     connection = get_db_connection()
     connection.execute("""DELETE FROM items WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(content=content,title=title))
