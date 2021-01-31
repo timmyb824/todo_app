@@ -4,13 +4,16 @@
 
 <h1>Dashboard</h1>
 <br>
-    <a href="/create">Add new list</a>
-    <a href="/edit-title">Edit list title</a>
-    <a href="/edit-content">Edit Content (not set up yet)</a>      
+    <a href="/create">Create new list/task</a>
+    <a href="/edit-title">Edit title</a>
+    <a href="/edit-task">Edit task</a>  
+    <a href="/delete-task">Delete task</a>          
     <a href="/delete">Delete list</a>  
 <br>
+<br>
+<br>
     {% for list, items in lists.items() %}
-        <div class="card" style="width: 18rem; margin-bottom: 50px;">
+        <div class="card" style="width: 18rem; margin-bottom: 50px; font-weight: bold">
             <div class="card-header">
                 <h3>{{ list }}</h3>
             </div>

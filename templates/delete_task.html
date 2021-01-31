@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<h2>Delete List</h2>
-<p>List name must match name on your dashboard</p>
-<form action="/delete" method = "post">
+<h2>Delete Task</h2>
+<p>List and task names must match names on your dashboard</p>
+<form action="/delete-task" method = "post">
     <input placeholder="List Name" name="title" type="text">
+    <input placeholder="Task Name" name="content" type="text">
     <input type="submit">  
 <p>{{ message }}</p> 
 <div class="footer-back">

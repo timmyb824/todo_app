@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Task</h2>
+<p>Old task name must match name on your dashboard</p>
+<form action="/edit-task" method = "post">
+    <input placeholder="Old Task Name" name="content" type="text">
+    <input placeholder="New Task Name" name="new_content" type="text">
+    <input type="submit">  
+<p>{{ message }}</p> 
+<div class="footer-back">
+    <a href="/dashboard">return to dashboard</a>
+</div>
+{% endblock %}

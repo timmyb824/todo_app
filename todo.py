@@ -71,6 +71,7 @@ def dashboard():
     except:
         return render_template('homepage.html', message = "Please sign in to access your dashboard")
 
+#render the create new list or task page
 @app.route('/create', methods = ['GET', 'POST'])
 def create():
     if request.method == 'POST':
@@ -82,17 +83,7 @@ def create():
     else:
         return render_template('create.html')
 
-@app.route('/delete', methods = ['GET', 'POST'])
-def delete():
-    if request.method == 'POST':
-        username = session['username']
-        title = request.form['title']
-        content = request.form['content']
-        message = model.delete(username, title, content)
-        return render_template('delete.html', message = message )
-    else:
-        return render_template('delete.html')
-
+#render the edit list name page
 @app.route('/edit-title', methods = ['GET', 'POST'])
 def edit_title():
     if request.method == 'POST':
@@ -103,6 +94,39 @@ def edit_title():
         return render_template('edit_title.html', message = message )
     else:
         return render_template('edit_title.html')
+
+#render the edit task page
+@app.route('/edit-task', methods = ['GET', 'POST'])
+def edit_task():
+    if request.method == 'POST':
+        content = request.form['content']
+        new_content = request.form['new_content']
+        message = model.edit_task(content, new_content)
+        return render_template('edit_task.html', message = message )
+    else:
+        return render_template('edit_task.html')
+
+#render the delete list page
+@app.route('/delete', methods = ['GET', 'POST'])
+def delete():
+    if request.method == 'POST':
+        username = session['username']
+        title = request.form['title']
+        message = model.delete(username, title)
+        return render_template('delete.html', message = message )
+    else:
+        return render_template('delete.html')
+
+#render the delete a task page
+@app.route('/delete-task', methods = ['GET', 'POST'])
+def delete_task():
+    if request.method == 'POST':
+        content = request.form['content']
+        title = request.form['title']
+        message = model.delete_task(content, title)
+        return render_template('delete_task.html', message = message )
+    else:
+        return render_template('delete_task.html')
 
 #about page
 @app.route('/about', methods = ['GET'])
