@@ -4,29 +4,47 @@
 
 <h1>Dashboard</h1>
 <br>
-    <a href="/create">Create new list/task</a>
-    <a href="/edit-title">Edit title</a>
-    <a href="/edit-task">Edit task</a>  
-    <a href="/delete-task">Delete task</a>          
-    <a href="/delete">Delete list</a>  
-<br>
+<!-- Menu Horizontal -->
+<ul class="menu">
+<li><a href=""><i class="fa fa-inbox"></i> Create</a>
+	<ul>
+	<li><a href="/create"><i class="fa fa-cog"></i> New List/Task</a></li>
+	</li>
+	</ul>
+</li>
+<li><a href=""><i class="fa fa-inbox"></i> Edit</a>
+	<ul>
+	<li><a href="/edit-title"><i class="fa fa-cog"></i> Edit Title</a></li>
+    <li><a href="/edit-task"><i class="fa fa-cog"></i> Edit Task</a></li>
+	</li>
+	</ul>
+</li>
+<li><a href=""><i class="fa fa-inbox"></i> Delete</a>
+	<ul>
+	<li><a href="/delete"><i class="fa fa-cog"></i> Delete List</a></li>
+    <li><a href="/delete-task"><i class="fa fa-cog"></i> Delete Task</a></li>
+	</li>
+	</ul>
+</li>
+</ul>
 <br>
 <br>
     {% for list, items in lists.items() %}
-        <div class="card" style="width: 18rem; margin-bottom: 50px; font-weight: bold">
-            <div class="card-header">
                 <h3>{{ list }}</h3>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul class="icons">
                 {% for item in items %}
-                    <li class="list-group-item">{{ item['content'] }}</li>
+                    <li><i class="fa fa-check"></i>{{ item['content'] }}</li>
                 {% endfor %}
             </ul>
             </div>
         </div>
     {% endfor %}
-<div class="logout">
-    <a href="/logout">Log out!</a>
-</div>
-
+<br>
+<br>
+<br>
+<br>
+<a class="button" href="/logout">Logout</a>
 {% endblock %}
+
+

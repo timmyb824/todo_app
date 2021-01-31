@@ -16,9 +16,9 @@ user = model.check_users()
 def home():
     if 'username' in session:
         g.user=session['username']
-        lists = model.todos(username)
+        lists = model.todos(g.user)
         return render_template('dashboard.html', lists = lists)
-    return render_template('homepage.html', message = 'Login or sign up!')
+    return render_template('homepage.html', message = 'Login or sign up')
 
 #redirecting to the home function above
 @app.route('/login', methods = ['GET', 'POST'])

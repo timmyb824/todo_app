@@ -2,19 +2,13 @@
 
 {% block content %}
     <h1>Timmyb Does To Do's </h1>
-    <p> {{ message }}</p>
-    <p>Login Here:</p>
+    <p> {{ message }} </p>
+    <a href="/signup">Signup Here</a>
+    <p>Login Here</p>
     <form action="/login" method = "post">
         <input placeholder="username" name="username" type="text">
         <input placeholder="Password" name="password" type="password">
         <input type="submit">
     </form>
-    <div class="footer-links">
-        <a href="/signup">Signup here</a>
-        <a href="/about">About Us</a>
-        <a href="/terms">Terms of Use</a>
-        <a href="/privacy">Privacy</a>
-    </div>
-
 {% endblock %}
 
