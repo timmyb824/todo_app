@@ -16,7 +16,8 @@ user = model.check_users()
 def home():
     if 'username' in session:
         g.user=session['username']
-        return render_template('homepage.html')
+        lists = model.todos(username)
+        return render_template('dashboard.html', lists = lists)
     return render_template('homepage.html', message = 'Login or sign up!')
 
 #redirecting to the home function above
@@ -142,7 +143,6 @@ def terms():
 @app.route('/privacy', methods = ['GET'])
 def privacy():
     return render_template('privacy.html')
-    
-          
+              
 if __name__ == '__main__':
     app.run(port = '5000', debug = True)
