@@ -5,9 +5,15 @@
 <h2>Delete List</h2>
 <p>List name must match name on your dashboard</p>
 <form action="/delete" method = "post">
-    <input placeholder="List Name" name="title" type="text">
+    <select id="select1" name="title" required>
+    {% for list, items in lists.items() %}
+     <option value="{{ list }}">{{ list }}</option>>
+    {% endfor %}
+    </select>
     <input type="submit">  
 <p>{{ message }}</p> 
+<br>
+<br>
 <div class="footer-back">
     <a class="button" href="/dashboard">Return to dashboard</a>
 </div>

@@ -105,10 +105,14 @@ def edit_task():
     if request.method == 'POST':
         content = request.form['content']
         new_content = request.form['new_content']
+        username = session['username']
+        lists = model.todos(username)
         message = model.edit_task(content, new_content)
-        return render_template('edit_task.html', message = message )
+        return render_template('edit_task.html', message = message, lists = lists )
     else:
-        return render_template('edit_task.html')
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('edit_task.html', lists = lists)
 
 #render the delete list page
 @app.route('/delete', methods = ['GET', 'POST'])
@@ -116,10 +120,13 @@ def delete():
     if request.method == 'POST':
         username = session['username']
         title = request.form['title']
+        lists = model.todos(username)
         message = model.delete(username, title)
-        return render_template('delete.html', message = message )
+        return render_template('delete.html', message = message, lists = lists )
     else:
-        return render_template('delete.html')
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('delete.html', lists = lists)
 
 #render the delete a task page
 @app.route('/delete-task', methods = ['GET', 'POST'])
@@ -127,10 +134,14 @@ def delete_task():
     if request.method == 'POST':
         content = request.form['content']
         title = request.form['title']
+        username = session['username']
+        lists = model.todos(username)
         message = model.delete_task(content, title)
-        return render_template('delete_task.html', message = message )
+        return render_template('delete_task.html', message = message, lists = lists )
     else:
-        return render_template('delete_task.html')
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('delete_task.html', lists = lists)
 
 #about page
 @app.route('/about', methods = ['GET'])

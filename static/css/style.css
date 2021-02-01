@@ -45,8 +45,8 @@ body{
 margin:0;
 padding:0 0 0 0;
 padding-left: 8px;
-color:#000;
-background:#efefef url(css/img/gray_jean.png);
+color: #2B2A2B;
+background:#9D9C9C url(css/img/gray_jean.png);
 font:normal 0.9em/150% 'Arimo', arial, verdana, sans-serif;
 text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 }
@@ -62,7 +62,7 @@ border:1px solid #ccc;
 
 #footer{
 text-align:center;
-padding:20px;
+padding:5px;
 margin:0;
 border-top:1px solid #ddd;
 color:#999;
@@ -148,15 +148,3 @@ display:block;
 #mc_embed_signup{
 padding:30px 0;
 }
-
-
-ul.icons{
-	margin:0 0 20px 0;
-	padding:0;
-	}
-	
-	ul.icons li{
-	list-style-type:none;
-	margin:0;
-	padding:5px 0;
-	}

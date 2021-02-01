@@ -3,12 +3,12 @@
 {% block content %}
 
 <h1>Dashboard</h1>
-<br>
+<p>Lists with no tasks associated to them will not be displayed - Add a task to the list <a href="/create">here. </p>
 <!-- Menu Horizontal -->
 <ul class="menu">
 <li><a href=""><i class="fa fa-inbox"></i> Create</a>
 	<ul>
-	<li><a href="/create"><i class="fa fa-cog"></i> New List/Task</a></li>
+	<li><a href="/create"><i class="fa fa-cog"></i> Add New</a></li>
 	</li>
 	</ul>
 </li>
@@ -41,7 +41,6 @@
             </ul>
         </div>
     {% endfor %}
-<br>
 <br>
 <br>
 <a class="button" href="/logout">Logout</a>
