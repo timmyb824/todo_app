@@ -57,6 +57,16 @@ def todos(username):
     connection.commit()
     connection.close()
     return lists
+       
+'''def lists(username):
+    connection = get_db_connection()
+    lists =  connection.execute("""SELECT title FROM lists WHERE user_id in (SELECT id FROM users WHERE username='{username}') ORDER BY title;""".format(username=username)).fetchall()
+
+    for list in lists:
+        return(list)
+
+    connection.commit()
+    connection.close()'''
 
 #create new todo list or create new task for an existing todo list
 def create(username, title, content):

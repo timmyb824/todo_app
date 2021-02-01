@@ -91,10 +91,13 @@ def edit_title():
         username = session['username']
         title = request.form['title']
         new_title = request.form['new_title']
+        lists = model.todos(username)
         message = model.edit_title(username, title, new_title)
-        return render_template('edit_title.html', message = message )
+        return render_template('edit_title.html', message = message, lists = lists )
     else:
-        return render_template('edit_title.html')
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('edit_title.html', lists = lists)
 
 #render the edit task page
 @app.route('/edit-task', methods = ['GET', 'POST'])

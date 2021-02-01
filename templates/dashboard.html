@@ -30,17 +30,17 @@
 <br>
 <br>
     {% for list, items in lists.items() %}
-                <h3>{{ list }}</h3>
-            </div>
-            <ul class="icons">
+    <div class="card" style="width: 18rem; margin-bottom: 50px;">
+        <div class="card-header">
+        <h3 style="font-weight: bold">{{ list }} </h3>
+        </div>
+            <ul class="list-group list-group-flush">
                 {% for item in items %}
-                    <li><i class="fa fa-check"></i>{{ item['content'] }}</li>
+                    <li class="list-group-item">{{ item['content'] }}</li>
                 {% endfor %}
             </ul>
-            </div>
         </div>
     {% endfor %}
-<br>
 <br>
 <br>
 <br>

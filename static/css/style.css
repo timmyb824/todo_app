@@ -44,6 +44,7 @@ font-family: "Arimo", arial, verdana, sans-serif;
 body{
 margin:0;
 padding:0 0 0 0;
+padding-left: 8px;
 color:#000;
 background:#efefef url(css/img/gray_jean.png);
 font:normal 0.9em/150% 'Arimo', arial, verdana, sans-serif;
