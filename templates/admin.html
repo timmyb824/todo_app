@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Admin</h1>
+    <p> {{ message }} </p>
+    <form action="/admin" method = "post">
+        <input placeholder="User" name="user" type="text">
+        <input placeholder="Password" name="password" type="password">
+        <input type="submit" class="small green">
+    </form>
+{% endblock %}

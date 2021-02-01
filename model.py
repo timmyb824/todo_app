@@ -114,6 +114,33 @@ def delete_task(content, title):
     connection.close()
     return 'Task deleted!'
 
+ #ADMIN PAGE CODE BELOW   
+
+
+#check admin password by taking in the username
+def check_admin_pw(user):
+    connection = get_db_connection()
+    password = connection.execute("""SELECT password FROM admins WHERE user='{user}' ORDER BY id DESC""".format(user = user)).fetchone()[0]
+
+    connection.commit()
+    connection.close()
+    return password
+
+
+#check users by looping through the table
+def check_admins():
+    connection = get_db_connection()
+    db_admins = connection.execute("""SELECT user FROM admins ORDER BY id DESC;""").fetchall()
+    admins = []
+
+    for i in range(len(db_admins)):
+        person = db_admins[i][0]
+        admins.append(person)
+
+    connection.commit()
+    connection.close()
+    return admins    
+
 
 
 

@@ -4,3 +4,4 @@ envs
 env/
 config.py
 notes.txt
+admin_seed.py

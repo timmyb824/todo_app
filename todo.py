@@ -157,6 +157,25 @@ def terms():
 @app.route('/privacy', methods = ['GET'])
 def privacy():
     return render_template('privacy.html')
+
+ #ADMIN PAGE CODE BELOW 
+
+#admin page
+@app.route('/admin', methods = ['GET', 'POST'])
+def admin():
+    if request.method == 'GET':
+        return render_template('admin.html')
+    else:
+        user = request.form['user']
+        password = request.form['password']
+        admin_db_password = model.check_admin_pw(user)
+
+        if password == admin_db_password:
+            user == 'admin'
+            return render_template('admin_dashboard.html', message = 'Welcome Admin!')
+        else:
+            error_message = 'Sorry, you are not the admin'
+            return render_template('admin.html', message = error_message)
               
 if __name__ == '__main__':
     app.run(port = '5000', debug = True)
