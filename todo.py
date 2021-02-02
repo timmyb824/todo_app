@@ -203,21 +203,21 @@ def admin_login():
     return render_template('admin/homepage.html', message = 'Sorry, you are no admin!')
 
 #admin users page
-@app.route('/users', methods = ['GET', ])
+@app.route('/users', methods = ['GET'])
 def admin_users():
     users = model.all_users()
-    return render_template('admin/users_page.html', message = 'Here is a list of users who have signed up', users = users)
+    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)
 
-'''#admin users page
-@app.route('/next-users', methods = ['GET', ])
-def next_users():
-    users = model.next_users()
-    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)'''
+#a single user page
+@app.route('/user-page', methods = ['GET', 'POST'])
+def user_page():
+    if request.method == 'POST':
+        #username = request.form['user']
+        #user = model.a_user(username)
+        return render_template('admin/user_page.html')
+    else:
+        return render_template('admin/user_page.html')
 
-@app.route('/admin-logout')
-def admin_logout():
-    session.pop('user')
-    return redirect(url_for('admin_home'))
 
 """@app.route('/admin', methods = ['GET', 'POST'])
 def admin():
@@ -235,6 +235,11 @@ def admin():
             error_message = 'Sorry, you are not the admin'
             return render_template('admin.html', message = error_message)"""
 
+#admin logout
+@app.route('/admin-logout')
+def admin_logout():
+    session.pop('user')
+    return redirect(url_for('admin_home'))
    
 if __name__ == '__main__':
     app.run(port = '5000', debug = True)

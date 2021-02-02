@@ -1,0 +1,21 @@
+{% extends "admin/templates/base.html" %}
+
+{% block content %}
+    <h1>User Info</h1>
+<table>
+    {% for user in users %}
+    <tr>
+        <th>id</th>
+        <th>user</th>
+        <th>created</th>
+      </tr>
+    <tr>
+      <td>{{user[0]}}</td>
+      <td>{{user[1]}}</td>
+      <td>{{user[2]}}</td>
+    {% endfor %} 
+    </tr>
+     
+<br>
+<a class="button" href="/admin">Back</a>
+{% endblock %}

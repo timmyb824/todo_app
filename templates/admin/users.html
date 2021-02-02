@@ -1,24 +1,35 @@
 {% extends "admin/templates/base.html" %}
 
 {% block content %}
-    <h1>Admin Users Page</h1>
-<p>List of users (50 at a time)</p>
-<table>
+    <h1>List of users</h1>
+<div class="container mb-3 mt-3">
+<table class="table table-striped table-bordered mydatatable" style="width:100%">
+    <thead>
     <tr>
-        <th>id</th>
         <th>user</th>
-        <th>created</th>
-      </tr>
-{% for user in users %}
-    <tr>
-      <td>{{user[0]}}</td>
-      <td>{{user[1]}}</td>
-      <td>{{user[2]}}</td>
     </tr>
- {% endfor %}   
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+      <td>
+    <form action="/user-page" method = "post" class="inline">
+    <input type="hidden">
+     <button type="submit" name="user" value="user" class="link-button">
+    {{user[0]}}
+     </button>
+     </form>
+      </td>
+    </tr>
+     {% endfor %}   
+    </tbody>
+    <tfoot>
+        <tr>
+        <th>user</th>
+    </tr>
+    </tfoot>
 </table>
-<a class="button" href="/next-users">Next 50 users</a>
-<br>
+</div>
 <br>
 <a class="button" href="/admin">Back</a>
 {% endblock %}

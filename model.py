@@ -179,11 +179,20 @@ def lists24():
 #get all users 
 def all_users():
     connection = get_db_connection()
-    users = connection.execute("""SELECT id, username, created FROM users ORDER BY id;""").fetchall()
+    users = connection.execute("""SELECT username FROM users ORDER BY id;""").fetchall()
 
     connection.commit()
     connection.close()
     return users
+
+#get a user
+def a_user(username):
+    connection = get_db_connection()
+    user = connection.execute("""SELECT id, username, created FROM users WHERE username = '{username}';""".format(username = username)).fetchall()
+
+    connection.commit()
+    connection.close()
+    return user
 
 
 

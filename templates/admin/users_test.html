@@ -6,29 +6,38 @@
 <table class="table table-striped table-bordered mydatatable" style="width:100%">
     <thead>
     <tr>
-        <th>id</th>
         <th>user</th>
-        <th>created</th>
+        <th>option</th>
     </tr>
     </thead>
     <tbody>
     {% for user in users %}
     <tr>
       <td>{{user[0]}}</td>
-      <td>{{user[1]}}</td>
-      <td>{{user[2]}}</td>
+        <td><select size="1" id="row-1-option" name="row-1-option">
+            <option value="view">
+                        view
+                </option>
+                <option value="delete">
+                        delete
+                </option>
+            </select></td>
     </tr>
      {% endfor %}   
     </tbody>
-    <tfoot>
-        <tr>
-        <th>id</th>
+        <tfoot>
+    <tr>
         <th>user</th>
-        <th>created</th>
+        <th>option</th>
     </tr>
     </tfoot>
 </table>
 </div>
+</form>
 <br>
 <a class="button" href="/admin">Back</a>
 {% endblock %}
+
+
+
+ 
