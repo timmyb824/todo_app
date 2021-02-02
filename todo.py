@@ -208,6 +208,12 @@ def admin_users():
     users = model.all_users()
     return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)
 
+'''#admin users page
+@app.route('/next-users', methods = ['GET', ])
+def next_users():
+    users = model.next_users()
+    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)'''
+
 @app.route('/admin-logout')
 def admin_logout():
     session.pop('user')
@@ -229,6 +235,6 @@ def admin():
             error_message = 'Sorry, you are not the admin'
             return render_template('admin.html', message = error_message)"""
 
-              
+   
 if __name__ == '__main__':
     app.run(port = '5000', debug = True)

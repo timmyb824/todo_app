@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Admin Users Page</h1>
+<p>List of users (50 at a time)</p>    
 <table>
     <tr>
         <th>id</th>
@@ -16,7 +17,7 @@
     </tr>
  {% endfor %}   
 </table>
-
+<a class="button" href="/next-users">Next 50 users</a>
 <br>
 <br>
 <a class="button" href="/admin">Back</a>

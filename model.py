@@ -177,14 +177,23 @@ def lists24():
     return signups24
 
 #get all users 
-#total lists created in the last 24hrs
 def all_users():
     connection = get_db_connection()
-    users = connection.execute("""SELECT id, username, created FROM users;""").fetchall()
+    users = connection.execute("""SELECT id, username, created FROM users ORDER BY id;""").fetchall()
 
     connection.commit()
     connection.close()
     return users
+
+'''#get all users 
+def next_users():
+    connection = get_db_connection()
+    next_users = connection.execute("""SELECT id, username, created FROM users ORDER BY id LIMIT 50 OFFSET 50;""").fetchall()
+
+    connection.commit()
+    connection.close()
+    return next_users'''
+
 
 
 
