@@ -1,0 +1,12 @@
+{% extends "admin/templates/base.html" %}
+
+{% block content %}
+    <h1>Admin</h1>
+    <p> {{ message }} </p>
+    <p> Total users signup: <a href="/users">{{ signups }}</a></p>
+    <p> Total users signup last 24hrs: <a href="/users">{{ signups24 }}</a></p>
+    <p> Total lists created:  {{ lists }}</p>
+    <p> Total lists created last 24hrs:  {{ lists24 }}</p>
+    <br>
+<a class="button" href="/admin-logout">Logout</a>
+{% endblock %}

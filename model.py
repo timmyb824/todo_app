@@ -116,7 +116,6 @@ def delete_task(content, title):
 
  #ADMIN PAGE CODE BELOW   
 
-
 #check admin password by taking in the username
 def check_admin_pw(user):
     connection = get_db_connection()
@@ -139,7 +138,53 @@ def check_admins():
 
     connection.commit()
     connection.close()
-    return admins    
+    return admins   
+
+#total user signups
+def signups():
+    connection = get_db_connection()
+    signups = connection.execute("""SELECT COUNT(DISTINCT id) FROM users;""").fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return signups
+
+#total user signups in the last 24hrs
+def signups24():
+    connection = get_db_connection()
+    signups24 = connection.execute("""SELECT COUNT(DISTINCT id) FROM users WHERE created >= date('now', '-1 days');""").fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return signups24
+
+#total lists created
+def lists():
+    connection = get_db_connection()
+    signups = connection.execute("""SELECT COUNT(DISTINCT id) FROM lists;""").fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return signups
+
+#total lists created in the last 24hrs
+def lists24():
+    connection = get_db_connection()
+    signups24 = connection.execute("""SELECT COUNT(DISTINCT id) FROM lists WHERE created >= date('now', '-1 days');""").fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return signups24
+
+#get all users 
+#total lists created in the last 24hrs
+def all_users():
+    connection = get_db_connection()
+    users = connection.execute("""SELECT id, username, created FROM users;""").fetchall()
+
+    connection.commit()
+    connection.close()
+    return users
 
 
 

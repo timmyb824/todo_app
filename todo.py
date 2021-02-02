@@ -17,8 +17,8 @@ def home():
     if 'username' in session:
         g.user=session['username']
         lists = model.todos(g.user)
-        return render_template('dashboard.html', lists = lists)
-    return render_template('homepage.html', message = 'Login or sign up')
+        return render_template('public/dashboard.html', lists = lists)
+    return render_template('public/homepage.html', message = 'Login or sign up')
 
 #redirecting to the home function above
 @app.route('/login', methods = ['GET', 'POST'])
@@ -30,7 +30,7 @@ def login():
         if request.form['password'] == pwd:
             session['username'] = request.form['username']
             return redirect(url_for('home'))
-    return render_template('homepage.html')
+    return render_template('public/homepage.html')
 
 #load user from session to run befor each request
 @app.before_request
@@ -44,12 +44,12 @@ def before_request():
 def signup():
     if request.method == 'GET':
         message = 'Please sign up!'
-        return render_template('signup.html', message = message)
+        return render_template('public/signup.html', message = message)
     else:
         username = request.form['username']
         password = request.form['password']
         message = model.signup(username, password)
-        return render_template('signup.html', message = message)
+        return render_template('public/signup.html', message = message)
 
 @app.route('/getsession')
 def getsession():
@@ -62,15 +62,15 @@ def logout():
     session.pop('username')
     return redirect(url_for('home'))
 
-#render a users dashboard
+'''#render a users dashboard
 @app.route('/dashboard', methods = ['GET'])
 def dashboard():
     try:
         username = session['username']
         lists = model.todos(username)
-        return render_template('dashboard.html', lists = lists)
+        return render_template('public/dashboard.html', lists = lists)
     except:
-        return render_template('homepage.html', message = "Please sign in to access your dashboard")
+        return render_template('public/homepage.html', message = "Please sign in to access your dashboard")'''
 
 #render the create new list or task page
 @app.route('/create', methods = ['GET', 'POST'])
@@ -80,9 +80,9 @@ def create():
         title = request.form['title']
         content = request.form['content']
         message = model.create(username, title, content)
-        return render_template('create.html', message = message )
+        return render_template('public/create.html', message = message )
     else:
-        return render_template('create.html')
+        return render_template('public/create.html')
 
 #render the edit list name page
 @app.route('/edit-title', methods = ['GET', 'POST'])
@@ -93,11 +93,11 @@ def edit_title():
         new_title = request.form['new_title']
         lists = model.todos(username)
         message = model.edit_title(username, title, new_title)
-        return render_template('edit_title.html', message = message, lists = lists )
+        return render_template('public/edit_title.html', message = message, lists = lists )
     else:
         username = session['username']
         lists = model.todos(username)
-        return render_template('edit_title.html', lists = lists)
+        return render_template('public/edit_title.html', lists = lists)
 
 #render the edit task page
 @app.route('/edit-task', methods = ['GET', 'POST'])
@@ -108,11 +108,11 @@ def edit_task():
         username = session['username']
         lists = model.todos(username)
         message = model.edit_task(content, new_content)
-        return render_template('edit_task.html', message = message, lists = lists )
+        return render_template('public/edit_task.html', message = message, lists = lists )
     else:
         username = session['username']
         lists = model.todos(username)
-        return render_template('edit_task.html', lists = lists)
+        return render_template('public/edit_task.html', lists = lists)
 
 #render the delete list page
 @app.route('/delete', methods = ['GET', 'POST'])
@@ -122,11 +122,11 @@ def delete():
         title = request.form['title']
         lists = model.todos(username)
         message = model.delete(username, title)
-        return render_template('delete.html', message = message, lists = lists )
+        return render_template('public/delete.html', message = message, lists = lists )
     else:
         username = session['username']
         lists = model.todos(username)
-        return render_template('delete.html', lists = lists)
+        return render_template('public/delete.html', lists = lists)
 
 #render the delete a task page
 @app.route('/delete-task', methods = ['GET', 'POST'])
@@ -137,31 +137,83 @@ def delete_task():
         username = session['username']
         lists = model.todos(username)
         message = model.delete_task(content, title)
-        return render_template('delete_task.html', message = message, lists = lists )
+        return render_template('public/delete_task.html', message = message, lists = lists )
     else:
         username = session['username']
         lists = model.todos(username)
-        return render_template('delete_task.html', lists = lists)
+        return render_template('public/delete_task.html', lists = lists)
 
 #about page
 @app.route('/about', methods = ['GET'])
 def about():
-    return render_template('about.html')
+    return render_template('public/about.html')
 
 #terms of use page
 @app.route('/terms', methods = ['GET'])
 def terms():
-    return render_template('terms.html')
+    return render_template('public/terms.html')
 
 #privacy page
 @app.route('/privacy', methods = ['GET'])
 def privacy():
-    return render_template('privacy.html')
+    return render_template('public/privacy.html')
 
- #ADMIN PAGE CODE BELOW 
+#ADMIN PAGE CODE BELOW
+#Likely some of this logic can be comined with the above logic instead of having everything seperate. For now it works though. 
 
-#admin page
-@app.route('/admin', methods = ['GET', 'POST'])
+#check admins in database
+user = ''
+admin = model.check_admins()
+
+#load user from session to run befor each request
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
+
+@app.route('/getadminsession')
+def getadminsession():
+    if 'user' in session:
+        return session['user']
+    return redirect(url_for('admin_home'))
+
+# admin home
+@app.route('/admin', methods = ['GET'])
+def admin_home():
+    if 'user' in session:
+        g.admin=session['user']
+        signups = model.signups()
+        signups24 = model.signups24()
+        lists = model.lists()
+        lists24 = model.lists24()
+        return render_template('admin/dashboard.html', message = 'Welcome Admin!', signups = signups, signups24 = signups24, lists = lists, lists24 = lists24)
+    return render_template('admin/homepage.html', message = 'Please login if you are the admin')
+
+#redirecting to the home function above
+@app.route('/admin-login', methods = ['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        session.pop('user', None)
+        areyouadmin = request.form['user']
+        pwd = model.check_admin_pw(areyouadmin)
+        if request.form['password'] == pwd:
+            session['user'] = request.form['user']
+            return redirect(url_for('admin_home'))
+    return render_template('admin/homepage.html', message = 'Sorry, you are no admin!')
+
+#admin users page
+@app.route('/users', methods = ['GET', ])
+def admin_users():
+    users = model.all_users()
+    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)
+
+@app.route('/admin-logout')
+def admin_logout():
+    session.pop('user')
+    return redirect(url_for('admin_home'))
+
+"""@app.route('/admin', methods = ['GET', 'POST'])
 def admin():
     if request.method == 'GET':
         return render_template('admin.html')
@@ -175,7 +227,8 @@ def admin():
             return render_template('admin_dashboard.html', message = 'Welcome Admin!')
         else:
             error_message = 'Sorry, you are not the admin'
-            return render_template('admin.html', message = error_message)
+            return render_template('admin.html', message = error_message)"""
+
               
 if __name__ == '__main__':
     app.run(port = '5000', debug = True)

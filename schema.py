@@ -7,7 +7,8 @@ cursor.execute(
     """CREATE TABLE users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username VARCHAR(16),
-        password VARCHAR(32)
+        password VARCHAR(32),
+        created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );"""
 )
 
