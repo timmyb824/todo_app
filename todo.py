@@ -206,7 +206,7 @@ def admin_login():
 @app.route('/users', methods = ['GET', ])
 def admin_users():
     users = model.all_users()
-    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)
+    return render_template('admin/users_page.html', message = 'Here is a list of users who have signed up', users = users)
 
 '''#admin users page
 @app.route('/next-users', methods = ['GET', ])

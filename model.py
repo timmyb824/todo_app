@@ -185,15 +185,6 @@ def all_users():
     connection.close()
     return users
 
-'''#get all users 
-def next_users():
-    connection = get_db_connection()
-    next_users = connection.execute("""SELECT id, username, created FROM users ORDER BY id LIMIT 50 OFFSET 50;""").fetchall()
-
-    connection.commit()
-    connection.close()
-    return next_users'''
-
 
 
 

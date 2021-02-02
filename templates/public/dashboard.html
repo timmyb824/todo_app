@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Dashboard</h1>
+<h1 style="font-weight: bolder">Dashboard</h1>
 <p>Lists with no tasks associated to them will not be displayed - Add a task to the list <a href="/create">here. </p>
 <!-- Menu Horizontal -->
 <ul class="menu">
@@ -28,15 +28,12 @@
 </li>
 </ul>
 <br>
-<br>
     {% for list, items in lists.items() %}
-    <div class="card" style="width: 18rem; margin-bottom: 50px;">
-        <div class="card-header">
-        <h3 style="font-weight: bold">{{ list }} </h3>
+        <h3 style="font-weight: bold"><u>{{ list }}</u></h3>
         </div>
-            <ul class="list-group list-group-flush">
+            <ul class="icons">
                 {% for item in items %}
-                    <li class="list-group-item">{{ item['content'] }}</li>
+                    <li><li><i class="fa fa-check"></i>{{ item['content'] }}</li>
                 {% endfor %}
             </ul>
         </div>
