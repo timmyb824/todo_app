@@ -30,7 +30,7 @@ def login():
         if request.form['password'] == pwd:
             session['username'] = request.form['username']
             return redirect(url_for('home'))
-    return render_template('public/homepage.html')
+    return render_template('public/homepage.html', message = 'Please try again')
 
 #load user from session to run befor each request
 @app.before_request
@@ -187,7 +187,7 @@ def admin_home():
         signups24 = model.signups24()
         lists = model.lists()
         lists24 = model.lists24()
-        return render_template('admin/dashboard.html', message = 'Welcome Admin!', signups = signups, signups24 = signups24, lists = lists, lists24 = lists24)
+        return render_template('admin/dashboard.html', message = 'Welcome to your dashboard', signups = signups, signups24 = signups24, lists = lists, lists24 = lists24)
     return render_template('admin/homepage.html', message = 'Please login if you are the admin')
 
 #redirecting to the home function above

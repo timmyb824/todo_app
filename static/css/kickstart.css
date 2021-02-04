@@ -29,7 +29,7 @@
 -moz-box-sizing: border-box;    /* Firefox, other Gecko */
 box-sizing: border-box;         /* Opera/IE 8+ */
 }
-a{color:#4D99E0;outline:0;}
+a{color:#1F3245;outline:0;font-weight:bold;}
 a:active{color:inherit;}
 a:visited{}
 a:hover{}
