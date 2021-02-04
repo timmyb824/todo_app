@@ -200,7 +200,7 @@ def admin_login():
         if request.form['password'] == pwd:
             session['user'] = request.form['user']
             return redirect(url_for('admin_home'))
-    return render_template('admin/homepage.html', message = 'Sorry, you are no admin!')
+    return render_template('admin/homepage.html', message = 'Sorry, you are not the admin!')
 
 #admin users page
 @app.route('/users', methods = ['GET'])
@@ -218,6 +218,12 @@ def user_page():
     else:
         return render_template('admin/user_page.html')
 
+#render the delete list page
+@app.route('/delete-user', methods = ['POST'])
+def delete_user():
+        username = request.form['username']
+        message = model.delete_user(username)
+        return render_template('admin/delete_user.html', message = message)
 
 """@app.route('/admin', methods = ['GET', 'POST'])
 def admin():

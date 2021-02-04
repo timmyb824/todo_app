@@ -9,11 +9,18 @@
         <th>created</th>
       </tr>
     <tr>
-      <td>{{user[0]}}</td>
-      <td>{{user[1]}}</td>
-      <td>{{user[3]}}</td>
+      <td>{{user['id']}}</td>
+      <td>{{user['username']}}</td>
+      <td>{{user['created']}}</td>
     </tr>
- </table>    
+ </table>
+ <br>
+   <form action="/delete-user" method = "post" >
+     <button type="submit" name="username" value="{{user['username']}}">
+     Delete
+     </button>
+     </form>
+   {{message}}  
 <br>
 <a class="button" href="/admin">Back</a>
 {% endblock %}

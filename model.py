@@ -195,6 +195,17 @@ def a_user(username):
     return user
 
 
+#delete user and lists (need to add a username check)
+def delete_user(username):
+    connection = get_db_connection()
+    connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username))
+    connection.execute("""DELETE FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}');""".format(username = username))
+    connection.execute("""DELETE FROM users WHERE username = '{username}';""".format(username=username))
+ 
+    connection.commit()
+    connection.close()
+    return 'User and any lists they created have been deleted'
+
 
 
 
