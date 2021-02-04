@@ -206,15 +206,15 @@ def admin_login():
 @app.route('/users', methods = ['GET'])
 def admin_users():
     users = model.all_users()
-    return render_template('admin/users.html', message = 'Here is a list of users who have signed up', users = users)
+    return render_template('admin/users.html', users = users)
 
 #a single user page
 @app.route('/user-page', methods = ['GET', 'POST'])
 def user_page():
     if request.method == 'POST':
-        #username = request.form['user']
-        #user = model.a_user(username)
-        return render_template('admin/user_page.html')
+        username = request.form['username']
+        user = model.a_user(username)
+        return render_template('admin/user_page.html', user = user)
     else:
         return render_template('admin/user_page.html')
 

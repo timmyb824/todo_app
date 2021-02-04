@@ -3,7 +3,6 @@
 {% block content %}
     <h1>User Info</h1>
 <table>
-    {% for user in users %}
     <tr>
         <th>id</th>
         <th>user</th>
@@ -12,10 +11,9 @@
     <tr>
       <td>{{user[0]}}</td>
       <td>{{user[1]}}</td>
-      <td>{{user[2]}}</td>
-    {% endfor %} 
+      <td>{{user[3]}}</td>
     </tr>
-     
+ </table>    
 <br>
 <a class="button" href="/admin">Back</a>
 {% endblock %}

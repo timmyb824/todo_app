@@ -188,7 +188,7 @@ def all_users():
 #get a user
 def a_user(username):
     connection = get_db_connection()
-    user = connection.execute("""SELECT id, username, created FROM users WHERE username = '{username}';""".format(username = username)).fetchall()
+    user = connection.execute("""SELECT * FROM users WHERE username = '{username}';""".format(username = username)).fetchone()
 
     connection.commit()
     connection.close()

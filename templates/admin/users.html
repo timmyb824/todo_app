@@ -1,7 +1,7 @@
 {% extends "admin/templates/base.html" %}
 
 {% block content %}
-    <h1>List of users</h1>
+      <h1>List of users</h1>
 <div class="container mb-3 mt-3">
 <table class="table table-striped table-bordered mydatatable" style="width:100%">
     <thead>
@@ -15,8 +15,8 @@
       <td>
     <form action="/user-page" method = "post" class="inline">
     <input type="hidden">
-     <button type="submit" name="user" value="user" class="link-button">
-    {{user[0]}}
+     <button type="submit" name="username" value="{{user['username']}}" class="link-button">
+    {{user['username']}}
      </button>
      </form>
       </td>
