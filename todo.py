@@ -167,7 +167,7 @@ admin = model.check_admins()
 
 #load user from session to run befor each request
 @app.before_request
-def before_request():
+def before_request_admin():
     g.user = None
     if 'user' in session:
         g.user = session['user']
