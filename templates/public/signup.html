@@ -1,16 +1,29 @@
-
 {% extends "public/templates/base.html" %}
 
 {% block content %}
 
     <h1>Signup for free!</h1>
-    <form action="/signup" method = "post">
-        <input placeholder="Username" name="username" type="text">
-        <input placeholder="Password" name="password" type="password">
-        <input type="submit">
-    </form>
-<p>{{ message }}</p>
+    <p>{{ message }}</p>
+<form class="pure-form pure-form-stacked" action="/signup" method = "post">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="aligned-name">Username</label>
+            <input type="text" id="aligned-name" placeholder="Username" name="username">
+            <span class="pure-form-message-inline">This is a required field.</span>
+        </div>
+        <br>
+        <div class="pure-control-group">
+            <label for="aligned-password">Password</label>
+            <input type="password" id="aligned-password" placeholder="Password" name="password">       
+        </div>
+    </fieldset>
+    <button type="submit" class="pure-button pure-button-primary">Submit</button>
+</form>
 <br>
 <br>
-<a class="button" href="/login">Back to sign-in</a>   
+<a class="pure-button pure-button-primary" href="/login">Back to sign-in</a> 
 {% endblock %}
+
+
+
+

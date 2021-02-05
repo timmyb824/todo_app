@@ -4,20 +4,20 @@
 
 <h2>Edit List</h2>
 <p>Select list title from the drop down that you wish to change</p>
-<form action="/edit-title" method = "post">
+<form action="/edit-title" method = "post" class="pure-form">
     <select id="select1" name="title" required>
     {% for list, items in lists.items() %}
      <option value="{{ list }}">{{ list }}</option>>
     {% endfor %}
     </select>
     <br>
-    <input id="text1" placeholder="New List Name" name="new_title" type="text">
     <br>
-    <input type="submit">
+    <input class="pure-input-rounded" placeholder="New List Name" name="new_title" type="text">
+    <br>
+    <br>
+    <input type="submit" class="pure-button">
 <p>{{ message }}</p> 
 <br>
 <br>
-<div class="footer-back">
-    <a class="button" href="/">Return to dashboard</a>
-</div>
+<a class="pure-button pure-button-primary" href="/">Return to dashboard</a>
 {% endblock %}

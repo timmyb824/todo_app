@@ -30,7 +30,7 @@ def login():
         if request.form['password'] == pwd:
             session['username'] = request.form['username']
             return redirect(url_for('home'))
-    return render_template('public/homepage.html', message = 'Please try again')
+    return render_template('public/homepage.html')
 
 #load user from session to run befor each request
 @app.before_request

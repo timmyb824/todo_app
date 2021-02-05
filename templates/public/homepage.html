@@ -3,11 +3,14 @@
 {% block content %}
     <h1>Timmyb Does To Do's </h1>
     <p> {{ message }} </p>
-    <a href="/signup">Signup Here</a>
-    <form action="/login" method = "post">
-        <input placeholder="username" name="username" type="text">
-        <input placeholder="Password" name="password" type="password">
-        <input type="submit" class="small green">
-    </form>
+    <a class="pure-button pure-button-primary" href="/signup">Signup Here</a>
+    <br>
+    <br>
+<form class="pure-form" action="/login" method = "post">
+    <input class="pure-input-rounded" placeholder="username" name="username" type="text">
+    <input class="pure-input-rounded" placeholder="Password" name="password" type="password">
+    <button type="submit" class="pure-button">submit</button>
+</form>
 {% endblock %}
+
 

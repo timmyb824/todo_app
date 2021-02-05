@@ -4,43 +4,61 @@
 
 <h1 style="font-weight: bolder">Dashboard</h1>
 <p>Lists with no tasks associated to them will not be displayed - Add a task to the list <a href="/create">here. </p>
-<!-- Menu Horizontal -->
-<ul class="menu">
-<li><a href=""><i class="fa fa-inbox"></i> Create</a>
-	<ul>
-	<li><a href="/create"><i class="fa fa-cog"></i> Add New</a></li>
-	</li>
-	</ul>
-</li>
-<li><a href=""><i class="fa fa-inbox"></i> Edit</a>
-	<ul>
-	<li><a href="/edit-title"><i class="fa fa-cog"></i> Edit Title</a></li>
-    <li><a href="/edit-task"><i class="fa fa-cog"></i> Edit Task</a></li>
-	</li>
-	</ul>
-</li>
-<li><a href=""><i class="fa fa-inbox"></i> Delete</a>
-	<ul>
-	<li><a href="/delete"><i class="fa fa-cog"></i> Delete List</a></li>
-    <li><a href="/delete-task"><i class="fa fa-cog"></i> Delete Task</a></li>
-	</li>
-	</ul>
-</li>
-</ul>
+<div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected">
+            <a href="#" class="pure-menu-link">Menu</a>
+        </li>
+        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" id="menuLink1" class="pure-menu-link">Create</a>
+            <ul class="pure-menu-children">
+                <li class="pure-menu-item">
+                    <a href="/create" class="pure-menu-link">Add New</a>
+                </li>
+            </ul>
+        </li>
+        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" id="menuLink1" class="pure-menu-link">Edit</a>
+            <ul class="pure-menu-children">
+                <li class="pure-menu-item">
+                    <a href="/edit-title" class="pure-menu-link">Edit Title</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/edit-task" class="pure-menu-link">Edit Task</a>
+                </li>
+            </ul>
+        </li>
+        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" id="menuLink1" class="pure-menu-link">Delete</a>
+            <ul class="pure-menu-children">
+                <li class="pure-menu-item">
+                    <a href="/delete" class="pure-menu-link">Delete List</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/delete-task" class="pure-menu-link">Delete Task</a>
+                </li>
+            </ul>
+        </li>        
+    </ul>
+</div>
+<br>
 <br>
     {% for list, items in lists.items() %}
-        <h3 style="font-weight: bold"><u>{{ list }}</u></h3>
-        </div>
-            <ul class="icons">
+        <div class="card" style="width: 20rem; margin-bottom: 25px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
                 {% for item in items %}
-                    <li><li><i class="fa fa-check"></i>{{ item['content'] }}</li>
+                    <li class="list-group-item">{{ item['content'] }}</li>
                 {% endfor %}
             </ul>
         </div>
     {% endfor %}
+
+
 <br>
-<br>
-<a class="button" href="/logout">Logout</a>
+<a class="pure-button pure-button-primary" href="/logout">Logout</a>
 {% endblock %}
 
 

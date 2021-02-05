@@ -4,7 +4,7 @@
 
 <h2>Edit Task</h2>
 <p>Select task from the drop down that you wish to change</p>
-<form action="/edit-task" method = "post">
+<form action="/edit-task" method = "post" class="pure-form">
     <select id="select1" name="content" required>
     {% for list, items in lists.items() %}
     {% for item in items %}
@@ -13,13 +13,13 @@
     {% endfor %}
     </select>
     <br>
-    <input placeholder="New Task Name" name="new_content" type="text">
+    <br>
+    <input class="pure-input-rounded" placeholder="New Task Name" name="new_content" type="text">
       <br>
-    <input type="submit">  
+      <br>
+    <input type="submit" class="pure-button">  
 <p>{{ message }}</p> 
 <br>
 <br>
-<div class="footer-back">
-    <a class="button" href="/">Return to dashboard</a>
-</div>
+<a class="pure-button pure-button-primary" href="/">Return to dashboard</a>
 {% endblock %}

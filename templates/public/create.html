@@ -4,12 +4,14 @@
 
 <h2>Create New List or Add New Task</h2>
 <p>Enter a new list and task or simply add a new task to an existing list (list name must match the name on your dashboard)</p>
-<form action="/create" method = "post">
-    <input placeholder="List Name" name="title" type="text">
-    <input placeholder="Task Name" name="content" type="text">
-    <input type="submit">  
+<form action="/create" method = "post" class="pure-form">
+    <input class="pure-input-rounded" placeholder="List Name" name="title" type="text">
+    <br>
+    <br>
+    <input class="pure-input-rounded" placeholder="Task Name" name="content" type="text">
+    <br>
+    <br>
+    <input type="submit" class="pure-button">  
 <p>{{ message }}</p> 
-<div class="footer-back">
-    <a class="button" href="/">Return to dashboard</a>
-</div>
+    <a class="pure-button pure-button-primary" href="/">Return to dashboard</a>
 {% endblock %}

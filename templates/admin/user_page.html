@@ -14,13 +14,15 @@
       <td>{{user['created']}}</td>
     </tr>
  </table>
- <br>
    <form action="/delete-user" method = "post" >
      <button class="btn btn-warning" type="submit" name="username" value="{{user['username']}}">
-     Delete
+     Delete User and Lists
      </button>
      </form>
    {{message}}  
 <br>
-<a type="button" class="btn btn-primary" href="/admin">Back</a>
+<br>
+<br>
+<br>
+<a type="button" class="btn btn-primary" href="/users">Back</a>
 {% endblock %}
