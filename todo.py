@@ -246,6 +246,8 @@ def admin():
 def admin_logout():
     session.pop('user')
     return redirect(url_for('admin_home'))
-   
+
+#I already have a Linode account so I used that to host my webiste. 
+#I opened port 5000 on my ubunutu server using ufw.    
 if __name__ == '__main__':
-    app.run(port = '5000', debug = True)
+    app.run(host = '0.0.0.0', port = '5000', debug = True)
