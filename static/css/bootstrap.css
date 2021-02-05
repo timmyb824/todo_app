@@ -2464,6 +2464,7 @@
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
+    margin-left: 10px;
   }
   
   .btn-primary:hover {
@@ -2496,6 +2497,7 @@
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
+    margin-left: 5px;
   }
   
   .btn-secondary:hover {
@@ -2592,6 +2594,7 @@
     color: #212529;
     background-color: #ffc107;
     border-color: #ffc107;
+    margin-left: 10px;
   }
   
   .btn-warning:hover {

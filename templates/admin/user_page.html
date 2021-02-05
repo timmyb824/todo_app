@@ -2,25 +2,25 @@
 
 {% block content %}
     <h1>User Info</h1>
-<table>
+<table class="table">
     <tr>
-        <th>id</th>
-        <th>user</th>
-        <th>created</th>
+        <th scope="col">id</th>
+        <th scope="col">user</th>
+        <th scope="col">created</th>
       </tr>
     <tr>
-      <td>{{user['id']}}</td>
+      <td scope="row">{{user['id']}}</td>
       <td>{{user['username']}}</td>
       <td>{{user['created']}}</td>
     </tr>
  </table>
  <br>
    <form action="/delete-user" method = "post" >
-     <button type="submit" name="username" value="{{user['username']}}">
+     <button class="btn btn-warning" type="submit" name="username" value="{{user['username']}}">
      Delete
      </button>
      </form>
    {{message}}  
 <br>
-<a class="button" href="/admin">Back</a>
+<a type="button" class="btn btn-primary" href="/admin">Back</a>
 {% endblock %}

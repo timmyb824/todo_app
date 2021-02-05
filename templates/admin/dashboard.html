@@ -2,13 +2,13 @@
 
 {% block content %}
     <h1>{{ message }} </h1>
-    <ul>
-        <li> Total users signup: <a href="/users">{{ signups }}</a></li>
-        <li> Total users signup last 24hrs: <a href="/users">{{ signups24 }}</a></li>
-        <li> Total lists created:  {{ lists }}</li>
-        <li> Total lists created last 24hrs:  {{ lists24 }}</li>
+    <ul class="list-group">
+        <li class="list-group-item"> Total users signup: <a href="/users">{{ signups }}</a></li>
+        <li class="list-group-item"> Total users signup last 24hrs: <a href="/users">{{ signups24 }}</a></li>
+        <li class="list-group-item"> Total lists created:  {{ lists }}</li>
+        <li class="list-group-item"> Total lists created last 24hrs:  {{ lists24 }}</li>
     </ul>
 
     <br>
-<a class="button" href="/admin-logout">Logout</a>
+<a type="class="button" class="btn btn-secondary" href="/admin-logout">Logout</a>
 {% endblock %}
