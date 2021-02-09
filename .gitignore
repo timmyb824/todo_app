@@ -9,3 +9,8 @@ seed2.py
 crontab.txt
 db_backup*
 upgrade.txt
+*.ini
+bin/
+lib/
+pyvenv.cfg
+wsgi*
