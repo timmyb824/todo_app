@@ -62,16 +62,6 @@ def logout():
     session.pop('username')
     return redirect(url_for('home'))
 
-'''#render a users dashboard
-@app.route('/dashboard', methods = ['GET'])
-def dashboard():
-    try:
-        username = session['username']
-        lists = model.todos(username)
-        return render_template('public/dashboard.html', lists = lists)
-    except:
-        return render_template('public/homepage.html', message = "Please sign in to access your dashboard")'''
-
 #render the create new list or task page
 @app.route('/create', methods = ['GET', 'POST'])
 def create():
@@ -142,6 +132,20 @@ def delete_task():
         username = session['username']
         lists = model.todos(username)
         return render_template('public/delete_task.html', lists = lists)
+
+
+@app.route('/done', methods = ['POST'])
+def done():
+    if request.method == 'POST':
+        id = request.form['id']
+        model.done(id)
+        return redirect(url_for('home'))
+
+@app.route('/undone', methods=['POST'])
+def undone():
+    id = request.form['id']
+    model.undone(id)
+    return redirect(url_for('home'))
 
 #about page
 @app.route('/about', methods = ['GET'])
@@ -225,22 +229,6 @@ def delete_user():
         message = model.delete_user(username)
         return render_template('admin/delete_user.html', message = message)
 
-"""@app.route('/admin', methods = ['GET', 'POST'])
-def admin():
-    if request.method == 'GET':
-        return render_template('admin.html')
-    else:
-        user = request.form['user']
-        password = request.form['password']
-        admin_db_password = model.check_admin_pw(user)
-
-        if password == admin_db_password:
-            user == 'admin'
-            return render_template('admin_dashboard.html', message = 'Welcome Admin!')
-        else:
-            error_message = 'Sorry, you are not the admin'
-            return render_template('admin.html', message = error_message)"""
-
 #admin logout
 @app.route('/admin-logout')
 def admin_logout():
@@ -250,4 +238,4 @@ def admin_logout():
 #I already have a Linode account so I used that to host my webiste. 
 #I opened port 5000 on my ubunutu server using ufw.    
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = '5000', debug = True)
+    app.run(host = "0.0.0.0", port = '5000', debug = True)

@@ -6,3 +6,6 @@ config.py
 notes.txt
 admin_seed.py
 seed2.py
+crontab.txt
+db_backup*
+upgrade.txt

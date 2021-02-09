@@ -27,6 +27,7 @@ cursor.execute(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         list_id INTEGER NOT NULL,
         created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        done INTEGER NOT NULL DEFAULT 0,
         content TEXT NOT NULL,
         FOREIGN KEY (list_id) REFERENCES lists(id)
     );"""

@@ -48,7 +48,7 @@ def signup(username, password):
 #read the todos (tasks and items)
 def todos(username):
     connection = get_db_connection()
-    todos = connection.execute("""SELECT i.id, i.content, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' ORDER BY l.title;""".format(username=username)).fetchall()
+    todos = connection.execute("""SELECT i.id, i.done, i.content, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' ORDER BY l.title;""".format(username=username)).fetchall()
     lists = {}
 
     for k, g in groupby(todos, key=lambda t: t['title']):
@@ -57,6 +57,7 @@ def todos(username):
     connection.commit()
     connection.close()
     return lists
+
 
 #create new todo list or create new task for an existing todo list
 def create(username, title, content):
@@ -113,6 +114,23 @@ def delete_task(content, title):
     connection.commit()
     connection.close()
     return 'Task deleted!'
+
+#define "done" action
+def done(id):
+    connection = get_db_connection()
+    connection.execute("""UPDATE items SET done = 1 WHERE id = {id}""".format(id = id))
+
+    connection.commit()
+    connection.close()
+    
+
+#define "undone" action
+def undone(id):
+    connection = get_db_connection()
+    connection.execute("""UPDATE items SET done = 0 WHERE id = {id}""".format(id = id))
+
+    connection.commit()
+    connection.close()
 
  #ADMIN PAGE CODE BELOW   
 
