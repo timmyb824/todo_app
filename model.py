@@ -31,12 +31,12 @@ def check_users():
     return users    
 
 #user signup    
-def signup(username, password):
+def signup(username, hashed_pass):
     connection = get_db_connection()
     exist = connection.execute("""SELECT password FROM users WHERE username='{username}';""".format(username=username)).fetchone()
 
     if exist is None:
-        connection.execute("""INSERT INTO users(username, password)VALUES('{username}', '{password}');""".format(username=username, password=password))
+        connection.execute("""INSERT INTO users(username, password)VALUES('{username}', '{hashed_pass}');""".format(username=username, hashed_pass=hashed_pass))
         connection.commit()
         connection.close()
     

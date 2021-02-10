@@ -1,17 +1,18 @@
 #import the model file making sure the name is unique
 #g is global variable for flask
-from flask import Flask, render_template, request, session, redirect, url_for, g
+from flask import Flask, render_template, request, session, redirect, url_for, g, flash
+from passlib.hash import pbkdf2_sha256
 import model
 
-#set secret key
+#set secret key from config file
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-#check users in database
+#check users in the database
 username = ''
 user = model.check_users()
 
-#home or root page
+#if users is already logged in then dashbboard otherwise homepage
 @app.route('/', methods = ['GET'])
 def home():
     if 'username' in session:
@@ -20,17 +21,17 @@ def home():
         return render_template('public/dashboard.html', lists = lists)
     return render_template('public/homepage.html', message = 'Login or sign up')
 
-#redirecting to the home function above
+#If user exists and and password is valid then login
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session.pop('username', None)
         areyouuser = request.form['username']
         pwd = model.check_pw(areyouuser)
-        if request.form['password'] == pwd:
+        if areyouuser is not None and pbkdf2_sha256.verify(request.form['password'], pwd):
             session['username'] = request.form['username']
             return redirect(url_for('home'))
-    return render_template('public/homepage.html')
+    return render_template('public/homepage.html', message = 'There is a problem logging you in')
 
 #load user from session to run befor each request
 @app.before_request
@@ -39,7 +40,7 @@ def before_request():
     if 'username' in session:
         g.username = session['username']
 
-#define user signup
+#define user signup and encrypt password
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
     if request.method == 'GET':
@@ -48,7 +49,8 @@ def signup():
     else:
         username = request.form['username']
         password = request.form['password']
-        message = model.signup(username, password)
+        hashed_pass = pbkdf2_sha256.hash(str(password))
+        message = model.signup(username, hashed_pass)
         return render_template('public/signup.html', message = message)
 
 @app.route('/getsession')
@@ -57,6 +59,7 @@ def getsession():
         return session['username']
     return redirect(url_for('login'))
 
+#log user out and return home
 @app.route('/logout')
 def logout():
     session.pop('username')
@@ -118,7 +121,7 @@ def delete():
         lists = model.todos(username)
         return render_template('public/delete.html', lists = lists)
 
-#render the delete a task page
+#render the delete task page
 @app.route('/delete-task', methods = ['GET', 'POST'])
 def delete_task():
     if request.method == 'POST':
@@ -133,7 +136,7 @@ def delete_task():
         lists = model.todos(username)
         return render_template('public/delete_task.html', lists = lists)
 
-
+#striking a task done
 @app.route('/done', methods = ['POST'])
 def done():
     if request.method == 'POST':
@@ -141,23 +144,24 @@ def done():
         model.done(id)
         return redirect(url_for('home'))
 
+#undo striking of task
 @app.route('/undone', methods=['POST'])
 def undone():
     id = request.form['id']
     model.undone(id)
     return redirect(url_for('home'))
 
-#about page
+#render about page
 @app.route('/about', methods = ['GET'])
 def about():
     return render_template('public/about.html')
 
-#terms of use page
+#render terms of use page
 @app.route('/terms', methods = ['GET'])
 def terms():
     return render_template('public/terms.html')
 
-#privacy page
+#render privacy page
 @app.route('/privacy', methods = ['GET'])
 def privacy():
     return render_template('public/privacy.html')
@@ -169,7 +173,7 @@ def privacy():
 user = ''
 admin = model.check_admins()
 
-#load user from session to run befor each request
+#load admin from session to run befor each request
 @app.before_request
 def before_request_admin():
     g.user = None
@@ -182,7 +186,7 @@ def getadminsession():
         return session['user']
     return redirect(url_for('admin_home'))
 
-# admin home
+#admin dashboard
 @app.route('/admin', methods = ['GET'])
 def admin_home():
     if 'user' in session:
