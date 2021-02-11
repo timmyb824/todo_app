@@ -29,6 +29,7 @@ cursor.execute(
         created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         done INTEGER NOT NULL DEFAULT 0,
         content TEXT NOT NULL,
+        due_by DATE NOT NULL,
         FOREIGN KEY (list_id) REFERENCES lists(id)
     );"""
 )

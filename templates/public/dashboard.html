@@ -55,6 +55,8 @@
                     style="text-decoration: line-through;"
                     {% endif %}
                     >{{ item['content'] }}
+                    &nbsp;
+                     <strong>Due:</strong> {{ item['due_by'] }}
                     {% if not item ['done'] %}
                         {% set URL = 'done' %}
                     {% else %}

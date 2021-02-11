@@ -72,7 +72,8 @@ def create():
         username = session['username']
         title = request.form['title']
         content = request.form['content']
-        message = model.create(username, title, content)
+        due_by = request.form['due_by']
+        message = model.create(username, title, content, due_by)
         return render_template('public/create.html', message = message )
     else:
         return render_template('public/create.html')

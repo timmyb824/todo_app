@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from itertools import groupby
 
 #define the database connection
@@ -48,7 +49,7 @@ def signup(username, hashed_pass):
 #read the todos (tasks and items)
 def todos(username):
     connection = get_db_connection()
-    todos = connection.execute("""SELECT i.id, i.done, i.content, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' ORDER BY l.title;""".format(username=username)).fetchall()
+    todos = connection.execute("""SELECT i.id, i.done, i.content, i.due_by, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' ORDER BY l.title;""".format(username=username)).fetchall()
     lists = {}
 
     for k, g in groupby(todos, key=lambda t: t['title']):
@@ -60,13 +61,13 @@ def todos(username):
 
 
 #create new todo list or create new task for an existing todo list
-def create(username, title, content):
+def create(username, title, content, due_by):
     connection = get_db_connection()
     exist = connection.execute("""SELECT id FROM lists WHERE title ='{title}' AND user_id in (SELECT id FROM users WHERE username='{username}');""".format(username=username,title=title)).fetchone()
   
     if exist is None:
         connection.execute("""INSERT INTO lists(user_id, title)VALUES((SELECT id FROM users WHERE username = '{username}'),'{title}');""".format(username=username, title=title))
-        connection.execute("""INSERT INTO items(list_id, content)VALUES((SELECT id FROM lists where title = '{title}'),'{content}');""".format(title=title, content=content))
+        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content, due_by=due_by))
 
     else:
         connection.execute("""INSERT INTO items(list_id, content)VALUES((SELECT id FROM lists where title = '{title}'),'{content}');""".format(title=title, content=content))
