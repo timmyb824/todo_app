@@ -55,8 +55,6 @@
                     style="text-decoration: line-through;"
                     {% endif %}
                     >{{ item['content'] }}
-                    &nbsp;
-                     <strong>Due:</strong> {{ item['due_by'] }}
                     {% if not item ['done'] %}
                         {% set URL = 'done' %}
                     {% else %}
@@ -73,6 +71,7 @@
                                 <button type="submit" value="{{item['id']}}" name="id" class="btn btn-success btn-sm">
                                 Done
                                 </button>
+                                <strong>Due:</strong> {{ item['due_by'] }}
                             </form>
                         </div>
                     </div>

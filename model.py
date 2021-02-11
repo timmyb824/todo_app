@@ -70,7 +70,7 @@ def create(username, title, content, due_by):
         connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content, due_by=due_by))
 
     else:
-        connection.execute("""INSERT INTO items(list_id, content)VALUES((SELECT id FROM lists where title = '{title}'),'{content}');""".format(title=title, content=content))
+        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by))
         connection.commit()
         connection.close()
         return 'New task added to todo'
