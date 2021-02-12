@@ -171,7 +171,7 @@ def donecount(username):
 
 def undonecount(username):
     connection = get_db_connection()
-    undonecount = connection.execute("""SELECT COUNT(DISTINCT id) FROM items WHERE done = 1 AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username)).fetchone()[0]
+    undonecount = connection.execute("""SELECT COUNT(DISTINCT id) FROM items WHERE done = 0 AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username)).fetchone()[0]
     
     connection.commit()
     connection.close()
