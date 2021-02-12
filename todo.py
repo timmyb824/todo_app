@@ -108,6 +108,22 @@ def edit_task():
         lists = model.todos(username)
         return render_template('public/edit_task.html', lists = lists)
 
+
+#render the edit due by page
+@app.route('/edit-dueby', methods = ['GET', 'POST'])
+def edit_dueby():
+    if request.method == 'POST':
+        content = request.form['content']
+        due_by = request.form['due_by']
+        username = session['username']
+        lists = model.todos(username)
+        message = model.edit_dueby(content, due_by)
+        return render_template('public/edit_dueby.html', message = message, lists = lists )
+    else:
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('public/edit_dueby.html', lists = lists)
+
 #render the delete list page
 @app.route('/delete', methods = ['GET', 'POST'])
 def delete():
@@ -244,3 +260,4 @@ def admin_logout():
 #I opened port 5000 on my ubunutu server using ufw.    
 if __name__ == '__main__':
     app.run(host = "0.0.0.0", port = '5000', debug = True)
+

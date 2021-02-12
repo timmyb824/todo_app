@@ -88,14 +88,23 @@ def edit_title(username, title, new_title):
     connection.close()
     return 'List name updated!'
 
-#update task name (need to add a username check)
+#update due by (need to add a username check)
 def edit_task(content, new_content):
     connection = get_db_connection()
     connection.execute("""UPDATE items SET content = '{new_content}' WHERE content = '{content}';""".format(new_content=new_content, content=content))
  
     connection.commit()
     connection.close()
-    return 'Task name updated!'
+    return 'Task name updated!'    
+
+#update task name (need to add a username check)
+def edit_dueby(content, due_by):
+    connection = get_db_connection()
+    connection.execute("""UPDATE items SET due_by = '{due_by}' WHERE content = '{content}';""".format(content=content, due_by=due_by))
+ 
+    connection.commit()
+    connection.close()
+    return 'Due by updated!'
 
 #delete todo list (need to add a username check)
 def delete(username, title):

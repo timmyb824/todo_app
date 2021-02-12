@@ -1,0 +1,24 @@
+{% extends "public/templates/base.html" %}
+
+{% block content %}
+
+<h2>Edit Due By</h2>
+<p>Select task from the drop down that you wish to change the due by date for</p>
+<form action="/edit-dueby" method = "post" class="pure-form">
+    <select id="select1" name="content" required>
+    {% for list, items in lists.items() %}
+    {% for item in items %}
+     <option value="{{ item['content'] }}">{{ item['content'] }}</option>
+    {% endfor %}
+    {% endfor %}
+    </select>
+    <br>
+    <br>
+    <input class="pure-input-rounded" name="due_by" type="date">
+    <br>
+    <input type="submit" class="pure-button">  
+<p>{{ message }}</p> 
+<br>
+<br>
+<a class="pure-button pure-button-primary" href="/">Return to dashboard</a>
+{% endblock %}
