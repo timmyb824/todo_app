@@ -142,7 +142,43 @@ def undone(id):
     connection.commit()
     connection.close()
 
- #ADMIN PAGE CODE BELOW   
+#how many lists the user currently has
+def listcount(username):
+    connection = get_db_connection()
+    listcount = connection.execute("""SELECT COUNT(DISTINCT id) FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}');""".format(username=username)).fetchone()[0]
+
+    connection.commit()
+    connection.close()
+    return listcount
+
+#how many tasks the user currently has
+def taskcount(username):
+    connection = get_db_connection()
+    taskcount = connection.execute("""SELECT COUNT(DISTINCT id) FROM items WHERE list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username)).fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return taskcount
+
+#how many tasks are done
+def donecount(username):
+    connection = get_db_connection()
+    donecount = connection.execute("""SELECT COUNT(DISTINCT id) FROM items WHERE done = 1 AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username)).fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return donecount
+
+def undonecount(username):
+    connection = get_db_connection()
+    undonecount = connection.execute("""SELECT COUNT(DISTINCT id) FROM items WHERE done = 1 AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username)).fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    return undonecount
+
+
+ ##########ADMIN PAGE CODE BELOW##########   
 
 #check admin password by taking in the username
 def check_admin_pw(user):

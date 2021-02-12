@@ -18,7 +18,11 @@ def home():
     if 'username' in session:
         g.user=session['username']
         lists = model.todos(g.user)
-        return render_template('public/dashboard.html', lists = lists)
+        listcount = model.listcount(g.user)
+        taskcount = model.taskcount(g.user)
+        donecount = model.donecount(g.user)
+        undonecount = model.undonecount(g.user)
+        return render_template('public/dashboard.html', lists = lists, listcount = listcount, taskcount = taskcount, donecount = donecount, undonecount = undonecount)
     return render_template('public/homepage.html', message = 'Login or sign up')
 
 #If user exists and and password is valid then login

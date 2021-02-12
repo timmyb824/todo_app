@@ -3,7 +3,8 @@
 {% block content %}
 
 <h1 style="font-weight: bolder">Dashboard</h1>
-<p>Lists with no tasks associated to them will not be displayed - Add a task to the list <a href="/create">here. </p>
+<p><strong>BY THE NUMBERS - </strong> You currently have: <strong>{{listcount}}</strong> lists, <strong>{{taskcount}}</strong> tasks, <strong>{{donecount}}</strong> done tasks, and <strong>{{undonecount}}</strong> not done tasks.</p>
+<p><em>Lists with no tasks associated to them will not be displayed - Add a task to the list <a href="/create">here. </em></p>
 <div class="pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
         <li class="pure-menu-item pure-menu-selected">
