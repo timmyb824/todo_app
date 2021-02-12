@@ -2,6 +2,7 @@
 #g is global variable for flask
 from flask import Flask, render_template, request, session, redirect, url_for, g, flash
 from passlib.hash import pbkdf2_sha256
+from datetime import date
 import model
 
 #set secret key from config file
@@ -112,7 +113,6 @@ def edit_task():
         lists = model.todos(username)
         return render_template('public/edit_task.html', lists = lists)
 
-
 #render the edit due by page
 @app.route('/edit-dueby', methods = ['GET', 'POST'])
 def edit_dueby():
@@ -127,6 +127,7 @@ def edit_dueby():
         username = session['username']
         lists = model.todos(username)
         return render_template('public/edit_dueby.html', lists = lists)
+
 
 #render the delete list page
 @app.route('/delete', methods = ['GET', 'POST'])
@@ -171,6 +172,15 @@ def undone():
     id = request.form['id']
     model.undone(id)
     return redirect(url_for('home'))
+
+#if users is already logged in then dashbboard otherwise homepage
+@app.route('/schedule', methods = ['GET'])
+def schedule():
+    username = session['username']
+    liststoday = model.todos_today(username)
+    listsweek = model.todos_week(username)
+    listsmonth = model.todos_month(username)
+    return render_template('public/schedule.html', liststoday = liststoday, listsweek = listsweek, listsmonth = listsmonth)
 
 #render about page
 @app.route('/about', methods = ['GET'])

@@ -1,0 +1,137 @@
+{% extends "public/templates/base.html" %}
+
+{% block content %}
+
+<h1 style="font-weight: bolder">Schedule</h1>
+<p><em>When are things due?</em></p>
+<h3>Tasks due today!</h3>
+    {% for list, items in liststoday.items() %}
+        <div class="card" style="width: 20rem; margin-bottom: 25px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for item in items %}
+                    <li class="list-group-item"
+                    {% if item['done'] %}
+                    style="text-decoration: line-through;"
+                    {% endif %}
+                    >{{ item['content'] }}
+                    {% if not item ['done'] %}
+                        {% set URL = 'done' %}
+                    {% else %}
+                        {% set URL = 'undone' %}
+                    {% endif %}
+
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <form action="{{ url_for(URL)}}" method="POST" class="inline">
+                            <input type="hidden">
+                                <button type="submit" value="{{item['id']}}" name="id" class="btn btn-success btn-sm">
+                                Done
+                                </button>
+                                <strong>Due:</strong> {{ item['due_by'] }}
+                            </form>
+                        </div>
+                    </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+<br>
+<br>
+
+<h3>Tasks due in the next 7 days!</h3>
+    {% for list, items in listsweek.items() %}
+        <div class="card" style="width: 20rem; margin-bottom: 25px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for item in items %}
+                    <li class="list-group-item"
+                    {% if item['done'] %}
+                    style="text-decoration: line-through;"
+                    {% endif %}
+                    >{{ item['content'] }}
+                    {% if not item ['done'] %}
+                        {% set URL = 'done' %}
+                    {% else %}
+                        {% set URL = 'undone' %}
+                    {% endif %}
+
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <form action="{{ url_for(URL)}}" method="POST" class="inline">
+                            <input type="hidden">
+                                <button type="submit" value="{{item['id']}}" name="id" class="btn btn-success btn-sm">
+                                Done
+                                </button>
+                                <strong>Due:</strong> {{ item['due_by'] }}
+                            </form>
+                        </div>
+                    </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+     <br>
+     <br>
+
+<h3>Don't worry about these you have plenty of time! &#128512</h3>
+<p><em>in case you do worry these are due in a week or more</em></p>
+    {% for list, items in listsmonth.items() %}
+        <div class="card" style="width: 20rem; margin-bottom: 25px;">
+            <div class="card-header">
+                <h3>{{ list }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for item in items %}
+                    <li class="list-group-item"
+                    {% if item['done'] %}
+                    style="text-decoration: line-through;"
+                    {% endif %}
+                    >{{ item['content'] }}
+                    {% if not item ['done'] %}
+                        {% set URL = 'done' %}
+                    {% else %}
+                        {% set URL = 'undone' %}
+                    {% endif %}
+
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <form action="{{ url_for(URL)}}" method="POST" class="inline">
+                            <input type="hidden">
+                                <button type="submit" value="{{item['id']}}" name="id" class="btn btn-success btn-sm">
+                                Done
+                                </button>
+                                <strong>Due:</strong> {{ item['due_by'] }}
+                            </form>
+                        </div>
+                    </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+<br>
+
+<a class="pure-button pure-button-primary" href="/">Return to dashboard</a>
+<br>
+<br>
+<br>
+<br>
+<a class="pure-button pure-button-primary" href="/logout">Logout</a>
+{% endblock %}

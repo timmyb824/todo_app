@@ -177,6 +177,45 @@ def undonecount(username):
     connection.close()
     return undonecount
 
+#read the todos due today
+def todos_today(username):
+    connection = get_db_connection()
+    todostoday = connection.execute("""SELECT i.id, i.done, i.content, i.due_by, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' and due_by = date('now') ORDER BY l.title;""".format(username=username)).fetchall()
+    liststoday = {}
+
+    for k, g in groupby(todostoday, key=lambda t: t['title']):
+        liststoday[k] = list(g)
+        
+    connection.commit()
+    connection.close()
+    return liststoday
+
+#read the todos due in the next 7 days
+def todos_week(username):
+    connection = get_db_connection()
+    todosweek = connection.execute("""SELECT i.id, i.done, i.content, i.due_by, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' and due_by between date('now', '1 days') and date('now', '6 days') ORDER BY l.title;""".format(username=username)).fetchall()
+    listsweek = {}
+
+    for k, g in groupby(todosweek, key=lambda t: t['title']):
+        listsweek[k] = list(g)
+        
+    connection.commit()
+    connection.close()
+    return listsweek
+
+#read the todos due in the month plus
+def todos_month(username):
+    connection = get_db_connection()
+    todosmonth = connection.execute("""SELECT i.id, i.done, i.content, i.due_by, l.title FROM items i JOIN lists l ON i.list_id = l.id JOIN users u ON l.user_id = u.id WHERE u.username = '{username}' and due_by > date('now', '6 days') ORDER BY l.title;""".format(username=username)).fetchall()
+    listsmonth = {}
+
+    for k, g in groupby(todosmonth, key=lambda t: t['title']):
+        listsmonth[k] = list(g)
+        
+    connection.commit()
+    connection.close()
+    return listsmonth
+
 
  ##########ADMIN PAGE CODE BELOW##########   
 
