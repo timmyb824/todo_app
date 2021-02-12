@@ -187,7 +187,7 @@ def terms():
 def privacy():
     return render_template('public/privacy.html')
 
-#ADMIN PAGE CODE BELOW
+##########ADMIN PAGE CODE BELOW##########
 #Likely some of this logic can be comined with the above logic instead of having everything seperate. For now it works though. 
 
 #check admins in database
