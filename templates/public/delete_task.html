@@ -3,9 +3,10 @@
 {% block content %}
 
 <h2>Delete Task</h2>
-<p>Select list and task from the drop downs that you wish to delete</p>
-<p>Task must be associated to the correct list for delete to work</p>
+<p>Select list and task you wish to delete:</p>
+<p><em>Please note the task must be associated to the correct list for the delete to work</em></p>
 <form action="/delete-task" method = "post" class="pure-form">
+    List:
     <select id="select1" name="title" required>
     {% for list, items in lists.items() %}
      <option class="pure-input-rounded" value="{{ list }}">{{ list }}</option>>
@@ -13,6 +14,7 @@
     </select>
     <br>
     <br>
+    Task:
     <select id="select1" name="content" required>
     {% for list, items in lists.items() %}
     {% for item in items %}

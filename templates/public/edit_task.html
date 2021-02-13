@@ -3,8 +3,9 @@
 {% block content %}
 
 <h2>Edit Task</h2>
-<p>Select task from the drop down that you wish to change</p>
+<p>Select task and enter new task content:</p>
 <form action="/edit-task" method = "post" class="pure-form">
+    Task:
     <select id="select1" name="content" required>
     {% for list, items in lists.items() %}
     {% for item in items %}
@@ -14,7 +15,8 @@
     </select>
     <br>
     <br>
-    <input class="pure-input-rounded" placeholder="New Task Name" name="new_content" type="text">
+    New Task:
+    <input class="pure-input-rounded" placeholder="New Task Content" name="new_content" type="text">
       <br>
       <br>
     <input type="submit" class="pure-button">  

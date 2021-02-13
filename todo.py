@@ -83,6 +83,22 @@ def create():
     else:
         return render_template('public/create.html')
 
+#render the create new task page
+@app.route('/add-task', methods = ['GET', 'POST'])
+def add_task():
+    if request.method == 'POST':
+        username = session['username']
+        title = request.form['title']
+        content = request.form['content']
+        due_by = request.form['due_by']
+        lists = model.todos(username)
+        message = model.add_task(title, content, due_by)
+        return render_template('public/add_task.html', lists = lists, message = message )
+    else:
+        username = session['username']
+        lists = model.todos(username)
+        return render_template('public/add_task.html', lists = lists)
+
 #render the edit list name page
 @app.route('/edit-title', methods = ['GET', 'POST'])
 def edit_title():
@@ -127,7 +143,6 @@ def edit_dueby():
         username = session['username']
         lists = model.todos(username)
         return render_template('public/edit_dueby.html', lists = lists)
-
 
 #render the delete list page
 @app.route('/delete', methods = ['GET', 'POST'])

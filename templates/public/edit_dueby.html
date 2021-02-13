@@ -3,8 +3,9 @@
 {% block content %}
 
 <h2>Edit Due By</h2>
-<p>Select task from the drop down that you wish to change the due by date for</p>
+<p>Select task and enter a new due by date:</p>
 <form action="/edit-dueby" method = "post" class="pure-form">
+    Task:
     <select id="select1" name="content" required>
     {% for list, items in lists.items() %}
     {% for item in items %}
@@ -14,6 +15,7 @@
     </select>
     <br>
     <br>
+    Due by:
     <input class="pure-input-rounded" name="due_by" type="date">
     <br>
     <br>

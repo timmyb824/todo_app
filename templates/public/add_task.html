@@ -2,18 +2,23 @@
 
 {% block content %}
 
-<h2>Edit List</h2>
-<p>Select list name and enter new list name:</p>
-<form action="/edit-title" method = "post" class="pure-form">
-    List: 
-    <select id="select1" name="title" required>
+<h2>Add New Task</h2>
+<p>Select List you wish to add a task to:</p>
+<form action="/add-task" method = "post" class="pure-form">
+    List:
+    <select id="select2" name="title" required>
     {% for list, items in lists.items() %}
      <option value="{{ list }}">{{ list }}</option>>
     {% endfor %}
     </select>
     <br>
     <br>
-    <input class="pure-input-rounded" placeholder="New List Name" name="new_title" type="text">
+    Task:
+    <input class="pure-input-rounded" placeholder="New Task" name="content" type="text">
+    <br>
+    <br>
+    Due by:
+    <input class="pure-input-rounded" name="due_by" type="date">
     <br>
     <br>
     <input type="submit" class="pure-button">

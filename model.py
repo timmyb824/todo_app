@@ -73,11 +73,21 @@ def create(username, title, content, due_by):
         connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by))
         connection.commit()
         connection.close()
-        return 'New task added to todo'
+        return 'New task added to existing list with that name'
 
     connection.commit()
     connection.close()
     return 'New todo created!'
+
+
+#create new task for an existing todo list
+def add_task(title, content, due_by):
+    connection = get_db_connection()
+    connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists WHERE title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by))
+    
+    connection.commit()
+    connection.close()
+    return 'New task added!'
 
 #update todo list name
 def edit_title(username, title, new_title):

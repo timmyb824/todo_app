@@ -3,8 +3,10 @@
 {% block content %}
 
 <h2>Delete List</h2>
-<p>List name must match name on your dashboard</p>
+<p>Select list you wish to delete:</p>
+<p><em>Please note this will also delete all tasks associated with the list!</em></p>
 <form action="/delete" method = "post" class="pure-form">
+    List:
     <select id="select1" name="title" required>
     {% for list, items in lists.items() %}
      <option class="pure-input-rounded" value="{{ list }}">{{ list }}</option>>
