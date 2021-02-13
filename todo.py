@@ -45,7 +45,7 @@ def before_request():
     if 'username' in session:
         g.username = session['username']
 
-#define user signup and encrypt password
+#define user signup and store password as a hash
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
     if request.method == 'GET':
@@ -213,7 +213,6 @@ def privacy():
     return render_template('public/privacy.html')
 
 ##########ADMIN PAGE CODE BELOW##########
-#Likely some of this logic can be comined with the above logic instead of having everything seperate. For now it works though. 
 
 #check admins in database
 user = ''
@@ -285,8 +284,7 @@ def admin_logout():
     session.pop('user')
     return redirect(url_for('admin_home'))
 
-#I already have a Linode account so I used that to host my webiste. 
-#I opened port 5000 on my ubunutu server using ufw.    
+#Remove host and the website will be accessible at localhost:5000  
 if __name__ == '__main__':
     app.run(host = "0.0.0.0", port = '5000', debug = True)
 

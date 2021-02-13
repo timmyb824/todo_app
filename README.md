@@ -22,3 +22,7 @@ Optional but recommended is to use a virtualenv - I like:
 ```bash
 sudo pip3 install virtualenv
 ```
+
+## Notes
+
+In addition to the todo application there is also a seperate admin page created that shows some basic stats about user and lists. Login for this page can be access at /admin. 
