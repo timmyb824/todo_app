@@ -1,6 +1,6 @@
 # todo_app
 
-This is a very basic todo list application created using the Flask framework. Please excuse definitions, variables, etc. I intend to fix them so they are more consistent and make sense. This was my first application!
+This is a very basic todo list application created using the Flask framework and Sqlite3. Please excuse definitions, variables, etc. I intend to fix them so they are more consistent and make sense. This was my first application!
 
 ## Installation
 
