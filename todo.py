@@ -95,7 +95,7 @@ def add_task():
         content = request.form['content']
         due_by = request.form['due_by']
         lists = model.todos(username)
-        message = model.add_task(title, content, due_by)
+        message = model.add_task(title, content, due_by, username)
         return render_template('public/add_task.html', lists = lists, message = message )
     else:
         username = session['username']
@@ -125,7 +125,7 @@ def edit_task():
         new_content = request.form['new_content']
         username = session['username']
         lists = model.todos(username)
-        message = model.edit_task(content, new_content)
+        message = model.edit_task(content, new_content, username)
         return render_template('public/edit_task.html', message = message, lists = lists )
     else:
         username = session['username']
@@ -140,7 +140,7 @@ def edit_dueby():
         due_by = request.form['due_by']
         username = session['username']
         lists = model.todos(username)
-        message = model.edit_dueby(content, due_by)
+        message = model.edit_dueby(content, due_by, username)
         return render_template('public/edit_dueby.html', message = message, lists = lists )
     else:
         username = session['username']
@@ -169,7 +169,7 @@ def delete_task():
         title = request.form['title']
         username = session['username']
         lists = model.todos(username)
-        message = model.delete_task(content, title)
+        message = model.delete_task(content, title, username)
         return render_template('public/delete_task.html', message = message, lists = lists )
     else:
         username = session['username']

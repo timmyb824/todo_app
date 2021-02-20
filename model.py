@@ -67,10 +67,12 @@ def create(username, title, content, due_by):
   
     if exist is None:
         connection.execute("""INSERT INTO lists(user_id, title)VALUES((SELECT id FROM users WHERE username = '{username}'),'{title}');""".format(username=username, title=title))
-        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content, due_by=due_by))
+        #connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists WHERE title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content, due_by=due_by))
+        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists WHERE title = '{title}' and user_id in (SELECT id FROM users WHERE username = '{username}')),'{content}','{due_by}');""".format(title=title, content=content, due_by=due_by, username=username))
+
 
     else:
-        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by))
+        connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists where title = '{title}' and user_id in (SELECT id FROM users WHERE username = '{username}')),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by, username=username))
         connection.commit()
         connection.close()
         return 'New task added to existing list with that name'
@@ -81,9 +83,9 @@ def create(username, title, content, due_by):
 
 
 #create new task for an existing todo list
-def add_task(title, content, due_by):
+def add_task(title, content, due_by, username):
     connection = get_db_connection()
-    connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists WHERE title = '{title}'),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by))
+    connection.execute("""INSERT INTO items(list_id, content, due_by)VALUES((SELECT id FROM lists WHERE title = '{title}' and user_id in (SELECT id FROM users WHERE username = '{username}')),'{content}','{due_by}');""".format(title=title, content=content,due_by=due_by, username=username))
     
     connection.commit()
     connection.close()
@@ -98,39 +100,44 @@ def edit_title(username, title, new_title):
     connection.close()
     return 'List name updated!'
 
-#update due by (need to add a username check)
-def edit_task(content, new_content):
+#update task name
+def edit_task(content, new_content, username):
     connection = get_db_connection()
-    connection.execute("""UPDATE items SET content = '{new_content}' WHERE content = '{content}';""".format(new_content=new_content, content=content))
- 
+    #connection.execute("""UPDATE items SET content = '{new_content}' WHERE content = '{content}';""".format(new_content=new_content, content=content))
+    connection.execute("""UPDATE items SET content = '{new_content}' WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(new_content=new_content, content=content, username=username))
+
     connection.commit()
     connection.close()
     return 'Task name updated!'    
 
-#update task name (need to add a username check)
-def edit_dueby(content, due_by):
+#update due by 
+def edit_dueby(content, due_by, username):
     connection = get_db_connection()
-    connection.execute("""UPDATE items SET due_by = '{due_by}' WHERE content = '{content}';""".format(content=content, due_by=due_by))
- 
+    #connection.execute("""UPDATE items SET due_by = '{due_by}' WHERE content = '{content}';""".format(content=content, due_by=due_by))
+    connection.execute("""UPDATE items SET due_by = '{due_by}' WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(content=content, due_by=due_by, username=username))
+
+
     connection.commit()
     connection.close()
     return 'Due by updated!'
 
-#delete todo list (need to add a username check)
+#delete todo list
 def delete(username, title):
     connection = get_db_connection()
-    connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(title=title))
+    #connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(title=title))
+    connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE title = '{title}' AND user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(title=title, username=username))
     connection.execute("""DELETE FROM lists WHERE title = '{title}' and user_id in (SELECT id FROM users WHERE username = '{username}');""".format(title=title, username = username))
- 
+
     connection.commit()
     connection.close()
     return 'Todo deleted!'
 
-#delete task (need to add a username check)
-def delete_task(content, title):
+#delete task
+def delete_task(content, title, username):
     connection = get_db_connection()
-    connection.execute("""DELETE FROM items WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(content=content,title=title))
- 
+    #connection.execute("""DELETE FROM items WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE title = '{title}');""".format(content=content,title=title))
+    connection.execute("""DELETE FROM items WHERE content = '{content}' AND list_id in (SELECT id FROM lists WHERE title = '{title}' AND user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(content=content,title=title, username=username))
+
     connection.commit()
     connection.close()
     return 'Task deleted!'
@@ -308,7 +315,7 @@ def a_user(username):
     return user
 
 
-#delete user and lists (need to add a username check)
+#delete user and lists
 def delete_user(username):
     connection = get_db_connection()
     connection.execute("""DELETE FROM items WHERE list_id in (SELECT id FROM lists WHERE user_id in (SELECT id FROM users WHERE username = '{username}'));""".format(username=username))
