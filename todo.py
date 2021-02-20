@@ -13,7 +13,7 @@ app.config.from_pyfile('config.py')
 username = ''
 user = model.check_users()
 
-#if users is already logged in then dashbboard otherwise homepage
+#if user is already logged in then dashbboard otherwise homepage
 @app.route('/', methods = ['GET'])
 def home():
     if 'username' in session:
@@ -29,14 +29,17 @@ def home():
 #If user exists and and password is valid then login
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        session.pop('username', None)
-        areyouuser = request.form['username']
-        pwd = model.check_pw(areyouuser)
-        if areyouuser is not None and pbkdf2_sha256.verify(request.form['password'], pwd):
-            session['username'] = request.form['username']
-            return redirect(url_for('home'))
-    return render_template('public/homepage.html', message = 'There is a problem logging you in')
+    try:
+        if request.method == 'POST':
+            session.pop('username', None)
+            areyouuser = request.form['username']
+            pwd = model.check_pw(areyouuser)
+            if areyouuser is not None and pbkdf2_sha256.verify(request.form['password'], pwd):
+                session['username'] = request.form['username']
+                return redirect(url_for('home'))
+        return render_template('public/homepage.html', message = 'There was an issue with your password. Please try again.')
+    except Exception as e:
+        return render_template('public/homepage.html', message = 'There was a problem logging you in. Please try again or signup.') 
 
 #load user from session to run befor each request
 @app.before_request

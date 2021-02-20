@@ -44,7 +44,7 @@ def signup(username, hashed_pass):
     else:
         return ('User already exists!')
 
-    return 'You have successfully signed up!'
+    return 'You have successfully signed up! Please return to the homepage and login!'
 
 #read the todos (tasks and items)
 def todos(username):
