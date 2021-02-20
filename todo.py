@@ -249,14 +249,17 @@ def admin_home():
 #redirecting to the home function above
 @app.route('/admin-login', methods = ['GET', 'POST'])
 def admin_login():
-    if request.method == 'POST':
-        session.pop('user', None)
-        areyouadmin = request.form['user']
-        pwd = model.check_admin_pw(areyouadmin)
-        if request.form['password'] == pwd:
-            session['user'] = request.form['user']
-            return redirect(url_for('admin_home'))
-    return render_template('admin/homepage.html', message = 'Sorry, you are not the admin!')
+    try:
+        if request.method == 'POST':
+            session.pop('user', None)
+            areyouadmin = request.form['user']
+            pwd = model.check_admin_pw(areyouadmin)
+            if request.form['password'] == pwd:
+                session['user'] = request.form['user']
+                return redirect(url_for('admin_home'))
+        return render_template('admin/homepage.html', message = 'Sorry, you are not the admin!')
+    except Exception as e:
+        return render_template('admin/homepage.html', message = 'Sorry, you are not the admin!') 
 
 #admin users page
 @app.route('/users', methods = ['GET'])
