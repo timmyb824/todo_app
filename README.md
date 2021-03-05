@@ -25,4 +25,4 @@ sudo pip3 install virtualenv
 
 ## Notes
 
-In addition to the todo application there is also a seperate admin page created that shows some basic stats about users and lists. There is also the ability to delete a user and all their lists. Login for this page can be accessed at /admin. 
+In addition to the todo web application there is also a seperate admin page created that shows some basic stats about users and lists. There is also the ability to delete a user and all their lists. Login for this page can be accessed at /admin. 
