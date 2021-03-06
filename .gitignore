@@ -14,3 +14,4 @@ bin/
 lib/
 pyvenv.cfg
 wsgi*
+weather.py
