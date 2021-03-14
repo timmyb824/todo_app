@@ -111,7 +111,8 @@ def edit_title():
         new_title = request.form['new_title']
         lists = model.todos(username)
         message = model.edit_title(username, title, new_title)
-        return render_template('public/edit_title.html', message = message, lists = lists )
+        #return render_template('public/edit_title.html', message = message, lists = lists )
+        return redirect(url_for('edit_title', message = message, lists = lists))
     else:
         username = session['username']
         lists = model.todos(username)
@@ -126,7 +127,8 @@ def edit_task():
         username = session['username']
         lists = model.todos(username)
         message = model.edit_task(content, new_content, username)
-        return render_template('public/edit_task.html', message = message, lists = lists )
+        #return render_template('public/edit_task.html', message = message, lists = lists )
+        return redirect(url_for('edit_task', message = message, lists = lists))
     else:
         username = session['username']
         lists = model.todos(username)
@@ -155,7 +157,8 @@ def delete():
         title = request.form['title']
         lists = model.todos(username)
         message = model.delete(username, title)
-        return render_template('public/delete.html', message = message, lists = lists )
+        #return render_template('public/delete.html', message = message, lists = lists )
+        return redirect(url_for('delete', message = message, lists = lists))
     else:
         username = session['username']
         lists = model.todos(username)
@@ -170,7 +173,8 @@ def delete_task():
         username = session['username']
         lists = model.todos(username)
         message = model.delete_task(content, title, username)
-        return render_template('public/delete_task.html', message = message, lists = lists )
+        #return render_template('public/delete_task.html', message = message, lists = lists )
+        return redirect(url_for('delete_task', message = message, lists = lists))
     else:
         username = session['username']
         lists = model.todos(username)
