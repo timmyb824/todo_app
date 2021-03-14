@@ -1,29 +1,33 @@
-{% extends "public/templates/base.html" %}
+{% extends "public/templates/base.html" %} {% block content %}
 
-{% block content %}
-
-    <h1>Signup for free!</h1>
-    <p>{{ message }}</p>
-<form class="pure-form pure-form-stacked" action="/signup" method = "post">
-    <fieldset>
-        <div class="pure-control-group">
-            <label for="aligned-name">Username</label>
-            <input type="text" id="aligned-name" placeholder="Username" name="username">
-            <span class="pure-form-message-inline">This is a required field.</span>
-        </div>
-        <br>
-        <div class="pure-control-group">
-            <label for="aligned-password">Password</label>
-            <input type="password" id="aligned-password" placeholder="Password" name="password">       
-        </div>
-    </fieldset>
-    <button type="submit" class="pure-button">Submit</button>
+<h1 style="font-weight: bolder">Signup for free!</h1>
+<p>{{ message }}</p>
+<form class="pure-form pure-form-stacked" action="/signup" method="post">
+  <fieldset>
+    <div class="pure-control-group">
+      <label for="aligned-name">Username</label>
+      <input
+        type="text"
+        id="aligned-name"
+        placeholder="Username"
+        name="username"
+      />
+      <span class="pure-form-message-inline">This is a required field.</span>
+    </div>
+    <br />
+    <div class="pure-control-group">
+      <label for="aligned-password">Password</label>
+      <input
+        type="password"
+        id="aligned-password"
+        placeholder="Password"
+        name="password"
+      />
+    </div>
+  </fieldset>
+  <button type="submit" class="pure-button">Submit</button>
 </form>
-<br>
-<br>
-<a class="pure-button pure-button-primary" href="/login">Back to sign-in</a> 
+<br />
+<br />
+<a class="pure-button pure-button-primary" href="/login">Back to sign-in</a>
 {% endblock %}
-
-
-
-
