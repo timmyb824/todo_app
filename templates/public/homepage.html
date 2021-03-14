@@ -1,17 +1,32 @@
-{% extends "public/templates/base.html" %}
-
-{% block content %}
-    <h1>Timmyb Does ToDo's </h1>
-    <p> {{ message }} </p>
-    <p> {{ error }} </p>
-    <a class="pure-button pure-button-primary" href="/signup">Signup Here</a>
-    <br>
-    <br>
-<form class="pure-form" action="/login" method = "post">
-    <input class="pure-input-rounded" placeholder="username" name="username" type="text">
-    <input class="pure-input-rounded" placeholder="Password" name="password" type="password">
-    <button type="submit" class="pure-button">submit</button>
+{% extends "public/templates/base.html" %} {% block content %}
+<h1>Timmyb Does ToDo's</h1>
+<p>{{ message }}</p>
+<p>{{ error }}</p>
+<a class="pure-button pure-button-primary" href="/signup">Signup Here</a>
+<br />
+<br />
+<form class="pure-form" action="/login" method="post">
+  <input
+    class="pure-input-rounded"
+    placeholder="username"
+    name="username"
+    type="text"
+  />
+  <input
+    class="pure-input-rounded"
+    placeholder="Password"
+    name="password"
+    type="password"
+  />
+  <button type="submit" class="pure-button">submit</button>
 </form>
+<br />
+<br />
+<iframe
+  src="http://free.timeanddate.com/countdown/i7puuzb9/n179/cf13/cm0/cu3/ct0/cs0/ca0/co1/cr0/ss0/cac000/cpc000/pcfff/tcfff/fn3/fs110/szw320/szh135/tatLast%20day%20of%20school%20NB%3A/tac000/tpc000/iso2021-06-18T02:25:00"
+  allowTransparency="true"
+  frameborder="0"
+  width="231"
+  height="80"
+></iframe>
 {% endblock %}
-
-
