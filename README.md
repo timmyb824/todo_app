@@ -4,18 +4,14 @@ This is a very basic todo list application created using the Flask framework and
 
 ## Installation
 
-Dependencies: 
+Dependencies:
 
 ```bash
 sudo apt-get install python3
 
 sudo apt-get install python3-pip
 
-sudo pip3 install flask
-
-sudo apt-get install sqlite3
-
-sudo pip3 install passlib
+pip install -r requirements.txt
 ```
 Optional, but recommended that you use a virtualenv - I like:
 
@@ -25,4 +21,4 @@ sudo pip3 install virtualenv
 
 ## Notes
 
-In addition to the todo web application there is also a seperate admin page created that shows some basic stats about users and lists. There is also the ability to delete a user and all their lists. Login for this page can be accessed at /admin. 
+In addition to the todo web application there is also a seperate admin page created that shows some basic stats about users and lists. There is also the ability to delete a user and all their lists. Login for this page can be accessed at /admin.
